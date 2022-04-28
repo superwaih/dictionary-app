@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import Header from "./Components/Header";
+import MeaningList from "./Components/MeaningList";
 
 
 
@@ -17,6 +18,7 @@ function App() {
     <InputContext.Provider value={value}>
       <div className="App">
        <Header />
+       <MeaningList />
         
       </div>
     </InputContext.Provider>

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { InputContext } from '../App'
 import axios from 'axios'
 import Definition from './Definition';
+import { WordUse } from './WordUse';
+import randomWords from 'random-words'
 
 axios.defaults.baseURL = 'https://api.dictionaryapi.dev/api/v2/entries/en';
 const MeaningList = () => {
@@ -9,7 +11,7 @@ const MeaningList = () => {
         const[data, setData] = useState(null);
         const[error, setError] = useState("");
         const[loading, setLoading] = useState(false);
-        const[randowWord, setRandowWOrd] = useState("");
+        const[randowWord, setRandowWord] = useState("");
 
 
         const fetchData = async (param) => {
@@ -32,11 +34,30 @@ const MeaningList = () => {
             }
         },[inputValue])
 
-        const fetchRandowWord = async () => {
-            try{
-                const ramd = axios.get()
-            }
-        }
+        const fetchRandowWord = () => {
+                fetch('https://random-words-api.vercel.app/word')
+                .then(response => response.json())
+                .then(result => 
+                    setRandowWord(result.word)
+                    )       
+             }
+
+
+        useEffect(() => {
+            //fetchRandowWord()
+          //  console.log(randomWords())
+           // if(randowWord){
+                console.log(randowWord)
+              fetchData(randomWords());
+           // }
+            
+          
+           
+               
+            
+        },[])
+
+
 
         if(loading) {
             return (
@@ -60,7 +81,7 @@ const MeaningList = () => {
                   <h3 className="text-2xl font-bold mt-4">Meaning & Definitions:</h3>
                   <Definition mean={data} />
                   <h3 className="text-2xl font-bold mt-4">Example:</h3>
-                  <Example mean={data} />
+                  <WordUse mean={data} />
                 </div>
              )}
             </div>
