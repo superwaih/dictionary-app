@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { InputContext } from "../App";
 
-const Header = () => {
+const Header = ({word}) => {
   const [value, setValue] = useState("");
   const { inputValue, setInputValue } = useContext(InputContext);
 
@@ -31,9 +31,13 @@ const Header = () => {
           </div>
         </div>
 
+        { !inputValue && (
+          <h3 className="text-gray-50 text-center mt-4">Result for: <span className="text-white font-bold">{word}</span></h3>
+         )}
+
        { inputValue && (
           <h3 className="text-gray-50 text-center mt-4">Result for: <span className="text-white font-bold">{inputValue}</span></h3>
-         )}
+         )} 
       </div>
     </div>
   );
